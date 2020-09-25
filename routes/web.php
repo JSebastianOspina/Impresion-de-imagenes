@@ -20,3 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('dropzone', 'DropZone@index');
+
+Route::post('dropzone/upload', 'DropZone@upload')->name('dropzone.upload');
+
+Route::get('dropzone/fetch', 'DropZone@fetch')->name('dropzone.fetch');
+
+Route::get('dropzone/delete', 'DropZone@delete')->name('dropzone.delete');
+
+
+
