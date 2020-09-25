@@ -27,6 +27,10 @@ Route::post('dropzone/upload', 'DropZone@upload')->name('dropzone.upload');
 
 Route::get('dropzone/fetch', 'DropZone@fetch')->name('dropzone.fetch');
 
+Route::get('zip', 'DropZone@zip')->name('dropzone.zip');
+
+Route::get('redimensionar', 'DropZone@redimensionar')->name('dropzone.redimensionar');
+
 Route::get('dropzone/delete', 'DropZone@delete')->name('dropzone.delete');
 
 
