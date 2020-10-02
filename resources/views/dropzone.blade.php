@@ -12,26 +12,49 @@
 <body>
     <div class="container-fluid">
         <br />
-        <h3 align="center">Image Upload in Laravel using Dropzone</h3>
+        <h3 align="center">Crear un nuevo album</h3>
         <br />
+      
+        <h4>1. Sube una foto de portada, luego, da clic en subir foto, para guardar los cambios</h4>
+       
+       
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Select Image</h3>
+                <h3 class="panel-title">Foto de portada</h3>
             </div>
             <div class="panel-body">
+                <form id="portada" class="dropzone" action="{{ route('dropzone.portada') }}">
+                    @csrf
+                </form>
+               
+            </div>
+        </div>
+
+
+
+        <h4>2. Sube las fotos de tu album. Cantidad recomendada: 60 fotos </h4>
+
+
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Fotos del album</h3>
+            </div>
+            <div class="panel-body">
+             
                 <form id="dropzoneForm" class="dropzone" action="{{ route('dropzone.upload') }}">
                     @csrf
                 </form>
                 <div align="center">
-                    <button type="button" class="btn btn-info" id="submit-all">Upload</button>
+                    <button type="button" class="btn btn-info" id="guardar">Guardar album</button>
                 </div>
             </div>
         </div>
         <br />
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Uploaded Image</h3>
+                <h3 class="panel-title">Imágenes subidas</h3>
             </div>
             <div class="panel-body" id="uploaded_image">
 
@@ -43,22 +66,19 @@
 </html>
 
 <script type="text/javascript">
+    
     Dropzone.options.dropzoneForm = {
 
 
         parallelUploads: 1,
         maxFiles: 60,
-        autoProcessQueue: false,
+        autoProcessQueue: true,
 
         acceptedFiles: ".png,.jpg,.gif,.bmp,.jpeg",
 
         init: function () {
-            var submitButton = document.querySelector("#submit-all");
+            
             myDropzone = this;
-
-            submitButton.addEventListener('click', function () {
-                myDropzone.processQueue();
-            });
 
             this.on("complete", function () {
 
@@ -105,5 +125,18 @@
             }
         })
     });
+
+    $(document).on('click', '#guardar', function () {
+        $.ajax({
+            url: "{{ route('dropzone.guardar') }}",
+            
+            success: function (data) {
+                
+               window.location.replace(data);
+
+            }
+        })
+    });
+
 
 </script>

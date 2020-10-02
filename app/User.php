@@ -12,7 +12,11 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
+    public function albums(){
+        
 
+        return $this->hasMany('App\Album');
+    }
     /**
      * The attributes that are mass assignable.
      *
