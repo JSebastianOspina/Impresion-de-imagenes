@@ -21,7 +21,7 @@ class DropZone extends Controller
     {
 
         $zip = Zip::create(uniqid() . '.zip');
-        $images = \File::allFiles(public_path($directorio."/nuevas"));
+        $images = \File::allFiles(public_path($directorio . "/nuevas"));
 
         foreach ($images as $image) {
 
@@ -70,15 +70,13 @@ class DropZone extends Controller
     function upload(Request $request)
     {
         $image = $request->file('file');
-        $aux = Auth::user()->albums->count() + 1;
+        $aux = (Auth::user()->albums->count() + 1);
         $directorio = "images/" . Auth::user()->id . "/" . $aux;
         $imageName = "";
         if (!File::exists($directorio)) { //Crear directorio para el album
             $image->move(public_path($directorio), "1." . $image->extension());
-            $imageName = "1.".$image->extension();
+            $imageName = "1." . $image->extension();
         } else {
-
-
 
             $contador = count(File::allFiles(public_path($directorio)));
 
