@@ -41,7 +41,7 @@ Route::get('album/guardar', 'AlbumController@guardarAlbum')->name('dropzone.guar
 
 Route::get('album/ver/{id}', 'AlbumController@verAlbum')->name('album.ver')->middleware('auth');
 
-Route::get('album/descargar', 'AlbumController@guardarAlbum')->name('album.descargar')->middleware('auth');
+Route::get('album/descargar/{id}', 'DropZone@redimensionar')->name('album.descargar')->middleware('auth');
 
 
 

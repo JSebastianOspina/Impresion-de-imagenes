@@ -40,11 +40,13 @@ class DropZone extends Controller
         $zip->close();
     }
 
-    public function redimensionar()
+    public function redimensionar($id)
     {
+        $aux = str_replace('-', '/', $id);
 
+        $directorio = "images/" .$aux;
 
-        $images = \File::allFiles(public_path('images'));
+        $images = \File::allFiles(public_path($directorio));
         $contador = 0;
         foreach ($images as $image) {
 
@@ -60,7 +62,7 @@ class DropZone extends Controller
             $newpic = imagecreatetruecolor($w, $h);
             imagecopyresized($newpic, $src, 0, 0, 0, 0, $w, $h, imagesx($src), imagesy($src));
 
-            $rand = 'images/nuevas/' . explode('.', $image->getFilename())[0];
+            $rand = $directorio."/nuevas/" . explode('.', $image->getFilename())[0];
 
             $hola = imagejpeg($newpic, $rand . '.jpg');
         }

@@ -46,7 +46,7 @@ En esta seccion se muestran todos los albumes de los clientes
                    
                     <td>
                         <a class="btn btn-success"
-                            href="{{ route('album.descargar',['id'=>$album->id]) }}"> Descargar album</a>
+                            href="{{ route('album.descargar',['id'=>$album->identificador]) }}"> Descargar album</a>
                        
                     </td>
 
