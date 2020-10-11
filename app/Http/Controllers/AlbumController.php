@@ -92,8 +92,9 @@ class AlbumController extends Controller
 
     public function verAlbum($id)
     {
-        $directorio = "images/" . Auth::user()->id . "/" . $id;
-        $album = Album::find($id);
+        $aux = str_replace('-','/',$id);
+        $directorio = "images/" . $aux;
+        $album = Album::where('identificador',$id)->first();
         $images = \File::allFiles(public_path($directorio));
         return view('panel.album.album',compact('images','directorio','album'));
     }
@@ -105,11 +106,13 @@ class AlbumController extends Controller
         $directorio = "images/" . Auth::user()->id . "/" . $aux;
         if (File::exists($directorio)) {
             $album = new Album();
-            $album->portada = $directorio."/.jpeg";
+            $album->portada = $directorio."/portada.jpeg";
             $album->cantidad =  count(\File::allFiles(public_path($directorio)));
             $album->user_id = Auth::user()->id;
+            $album->identificador =Auth::user()->id . "-" . $aux;
+
             $album->save();
-            return response(route('album.ver',['id'=>$aux]),200);
+            return response(route('album.ver',['id'=>Auth::user()->id . "-" . $aux]),200);
         } else {
             return response('',403);
         }

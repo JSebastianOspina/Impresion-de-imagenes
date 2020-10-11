@@ -33,14 +33,14 @@ En esta seccion se muestran todos los albumes de los clientes
                 <tr>
 
                     <td>{{ $album->user->name }}</td>
-                    <td>{{ $album->id }} </td>
+                    <td>{{ $album->identificador }} </td>
                     <td>
                         <a href="{{ '/storage/'.$album->imagen }}"
                             target="_blank">Clic para ver la imagen</a>
                     </td>
                     <td>
                         <a class="btn btn-success"
-                            href="{{ route('album.ver',['id'=>$album->id]) }}">Ver Album</a>
+                            href="{{ route('album.ver',['id'=>$album->identificador]) }}">Ver Album</a>
                        
                     </td>
                    

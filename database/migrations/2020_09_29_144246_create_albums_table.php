@@ -17,6 +17,7 @@ class CreateAlbumsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('portada');
+            $table->string('identificador')->nullable();
             $table->string('url')->nullable();
             $table->string('cantidad')->nullable();
 
