@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Album;
 use Illuminate\Http\Request;
 use App\Subida;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Zip;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class DropZone extends Controller
 {
@@ -19,32 +21,30 @@ class DropZone extends Controller
     }
     public function zip($directorio)
     {
-
-        $zip = Zip::create(uniqid() . '.zip');
+        
+        $nombre = uniqid() . '.zip';
+        $zip = Zip::create($nombre);
         $images = \File::allFiles(public_path($directorio . "/nuevas"));
 
         foreach ($images as $image) {
-
-
-
-
 
             $zip->add($image->getPath());
             break;
         }
 
 
-
-        var_dump($zip);
+       // var_dump($zip);
 
         $zip->close();
+       
+        return $nombre;
     }
 
     public function redimensionar($id)
     {
         $aux = str_replace('-', '/', $id);
 
-        $directorio = "images/" .$aux;
+        $directorio = "images/" . $aux;
 
         $images = \File::allFiles(public_path($directorio));
         $contador = 0;
@@ -62,10 +62,13 @@ class DropZone extends Controller
             $newpic = imagecreatetruecolor($w, $h);
             imagecopyresized($newpic, $src, 0, 0, 0, 0, $w, $h, imagesx($src), imagesy($src));
 
-            $rand = $directorio."/nuevas/" . explode('.', $image->getFilename())[0];
+            $rand = $directorio . "/nuevas/" . explode('.', $image->getFilename())[0];
 
             $hola = imagejpeg($newpic, $rand . '.jpg');
         }
+        $zip = $this->zip($directorio);
+        
+        return response()->download(public_path()."/".$zip);
     }
 
 
