@@ -94,15 +94,7 @@
                         <!-- create new -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             <span class="d-none d-md-block">Crear  <i class="fa fa-angle-down"></i></span>
-                             <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>   
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Nueva tienda</a>
-                                <a class="dropdown-item" href="#">Nuevo producto</a>
-                               
-                            </div>
+                          
                         
                        
                     </ul>
@@ -146,34 +138,24 @@
                         -->
                             <!-- End User Profile-->
                         </li>
-                        <li class="p-15 mt-2"><a href="javascript:void(0)" class="btn btn-block create-btn text-white no-block d-flex align-items-center"><i class="fa fa-plus-square"></i> <span class="hide-menu ml-1"> Nueva tienda</span> </a></li>
+                    <li class="p-15 mt-2"><a href="{{route('dropzone.index')}}" class="btn btn-block create-btn text-white no-block d-flex align-items-center"><i class="fa fa-plus-square"></i> <span class="hide-menu ml-1">Nuevo album</span> </a></li>
                         <!-- User Profile-->
-                            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Negocios </span></a>
+                            <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Albumes </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="{{route('inicio')}}" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu"> Ver todos los negocios </span></a></li>
+                                <li class="sidebar-item"><a href="{{route('inicio')}}" class="sidebar-link"><i class="mdi mdi-adjust"></i><span class="hide-menu">Ver todos los albumes</span></a></li>
                                 
                               
                             </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-tune-vertical"></i><span class="hide-menu">Productos</span></a>
+
+                        <!--
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-tune-vertical"></i><span class="hide-menu">Usuarios</span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="sidebar-type-minisidebar.html" class="sidebar-link"><i class="mdi mdi-view-quilt"></i><span class="hide-menu"> Crear nuevo producto </span></a></li>
-                                <li class="sidebar-item"><a href="sidebar-type-iconsidebar.html" class="sidebar-link"><i class="mdi mdi-view-parallel"></i><span class="hide-menu"> Ver productos </span></a></li>
+                                <li class="sidebar-item"><a href="sidebar-type-minisidebar.html" class="sidebar-link"><i class="mdi mdi-view-quilt"></i><span class="hide-menu"> Ver todos los usuarios </span></a></li>
                                
                             </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-content-copy"></i><span class="hide-menu">Ventas</span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="layout-inner-fixed-left-sidebar.html" class="sidebar-link"><i class="mdi mdi-format-align-left"></i><span class="hide-menu"> Ver todas las ventas </span></a></li>
-                                
-                            </ul>
-                        </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-content-copy"></i><span class="hide-menu">Cupones</span></a>
-                            <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="" class="sidebar-link"><i class="mdi mdi-format-align-left"></i><span class="hide-menu"> Administrar cupones</span></a></li>
-                                
-                            </ul>
-                        </li>
+                    -->
                         <!--
                         <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Apps</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-inbox-arrow-down"></i><span class="hide-menu">Inbox </span></a>

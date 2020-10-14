@@ -8,7 +8,7 @@ Creación de nuevo album
 @section('contenido')
  
   
-    <h3 class="font-light mt-3" >1. Sube una foto de portada, luego, da clic en subir foto, para guardar los cambios</h3>
+    <h3 class="font-light mt-3" >1. Sube una foto de portada, esta se guardará automáticamente</h3>
    
    
 
@@ -24,7 +24,7 @@ Creación de nuevo album
 
 
 
-    <h3 class="mt-3 font-light">2. Sube las fotos de tu album. Cantidad recomendada: 60 fotos </h3>
+    <h3 class="mt-3 font-light">2. Sube las fotos de tu album. Cantidad recomendada: 60 fotos</h3>
 
 
     

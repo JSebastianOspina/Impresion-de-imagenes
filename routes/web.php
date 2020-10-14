@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('inicio');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('dropzone', 'DropZone@index')->middleware('auth')->name('dropzone.index');
+Route::get('crearAlbum', 'DropZone@index')->middleware('auth')->name('dropzone.index');
 
 Route::post('dropzone/upload', 'DropZone@upload')->name('dropzone.upload')->middleware('auth');
 Route::post('dropzone/portada', 'DropZone@portada')->name('dropzone.portada')->middleware('auth');
@@ -44,5 +46,11 @@ Route::get('album/ver/{id}', 'AlbumController@verAlbum')->name('album.ver')->mid
 Route::get('album/descargar/{id}', 'DropZone@redimensionar')->name('album.descargar')->middleware('auth');
 
 
+Route::get('/usuarios','AlbumController@usuarios')->name('usuarios')->middleware('auth');
 
-
+Route::get('/migrate', function () {
+    //return public_path();
+Auth::user()->assignRole('admin');
+    die();
+    Artisan::call('storage:link');
+});

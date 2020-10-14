@@ -2,7 +2,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Image Upload in Laravel using Dropzone</title>
+    <title>Subir un nuevo album</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" />
@@ -15,7 +15,7 @@
         <h3 align="center">Crear un nuevo album</h3>
         <br />
       
-        <h4>1. Sube una foto de portada, luego, da clic en subir foto, para guardar los cambios</h4>
+        <h4>1. Sube una foto de portada, esta se guardará automáticamente</h4>
        
        
 

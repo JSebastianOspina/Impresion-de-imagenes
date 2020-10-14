@@ -21,11 +21,11 @@ class DropZone extends Controller
     }
     public function zip($directorio)
     {
-        
-        $nombre = uniqid() . '.zip';
+        $aux = uniqid() . '.zip';
+        $nombre = "../laravel/storage/app/images/".$aux;
         $zip = Zip::create($nombre);
-        $images = \File::allFiles(public_path($directorio . "/nuevas"));
-
+        $images = File::allFiles($directorio . "/nuevas");
+        
         foreach ($images as $image) {
 
             $zip->add($image->getPath());
@@ -33,11 +33,12 @@ class DropZone extends Controller
         }
 
 
-       // var_dump($zip);
 
+       // Storage::putFileAs('images',$zip,$nombre);
         $zip->close();
+
        
-        return $nombre;
+        return $aux;
     }
 
     public function redimensionar($id)
@@ -46,8 +47,8 @@ class DropZone extends Controller
 
         $directorio = "images/" . $aux;
 
-        $images = \File::allFiles(public_path($directorio));
-        $contador = 0;
+        $images = File::allFiles($directorio);
+        
         foreach ($images as $image) {
 
             $src = imagecreatefromstring(file_get_contents($image->getRealPath()));
@@ -68,7 +69,7 @@ class DropZone extends Controller
         }
         $zip = $this->zip($directorio);
         
-        return response()->download(public_path()."/".$zip);
+        return response()->download(storage_path()."/app/images/".$zip);
     }
 
 
@@ -78,20 +79,21 @@ class DropZone extends Controller
         $aux = (Auth::user()->albums->count() + 1);
         $directorio = "images/" . Auth::user()->id . "/" . $aux;
         $imageName = "";
-        if (!File::exists($directorio)) { //Crear directorio para el album
-            $image->move(public_path($directorio), "1." . $image->extension());
-            $imageName = "1." . $image->extension();
+        if (!Storage::exists($directorio)) { //Crear directorio para el album
+            $image->storeAs($directorio,"1." . $image->extension());
+//            $image->move(public_path($directorio), "1." . $image->extension());
+           
         } else {
 
-            $contador = count(File::allFiles(public_path($directorio)));
+            $contador = count(Storage::allFiles($directorio));
 
             $imageName =   $contador + 1 . '.' . $image->extension();
-
-            $image->move(public_path($directorio), $imageName);
+            $image->storeAs($directorio,$imageName);
+            //$image->move(public_path($directorio), $imageName);
         }
 
-        if (!File::exists($directorio . "/nuevas")) {
-            File::makeDirectory($directorio . "/nuevas");
+        if (!Storage::exists($directorio . "/nuevas")) {
+            Storage::makeDirectory($directorio . "/nuevas");
         }
 
         return response()->json(['success' => $imageName]);
@@ -109,7 +111,7 @@ class DropZone extends Controller
 
         $imageName =   "portada" . '.' . $image->extension();
 
-        $image->move(public_path($directorio), $imageName);
+        $image->storeAs($directorio, $imageName);
 
 
         return response()->json(['success' => $imageName]);
@@ -122,16 +124,17 @@ class DropZone extends Controller
         $aux = Auth::user()->albums->count() + 1;
         $directorio = "images/" . Auth::user()->id . "/" . $aux;
 
-        $images = \File::allFiles(public_path($directorio));
+        $images = File::allFiles($directorio);
         $output = '<div class="row">';
         foreach ($images as $image) {
             $output .= '
       <div class="col-md-2" style="margin-bottom:16px;" align="center">
                 <img src="' . asset($directorio . '/' . $image->getFilename()) . '" class="img-thumbnail" width="175" height="175" style="height:175px;" />
-                <button type="button" class="btn btn-link remove_image" id="' . $image->getFilename() . '">Remove</button>
             </div>
       ';
         }
+        //<button type="button" class="btn btn-link remove_image" id="' . $image->getFilename() . '">Remove</button>
+
         $output .= '</div>';
         echo $output;
     }

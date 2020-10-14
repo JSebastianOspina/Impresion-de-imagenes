@@ -19,75 +19,9 @@ class AlbumController extends Controller
     public function index()
     {
 
-        $albumes = Album::all();
+        $albumes = Auth::user()->hasRole('admin') ? Album::all() : Auth::user()->albums;
 
         return view('panel.album.clientes', compact('albumes'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function verAlbum($id)
@@ -95,7 +29,7 @@ class AlbumController extends Controller
         $aux = str_replace('-', '/', $id);
         $directorio = "images/" . $aux;
         $album = Album::where('identificador', $id)->first();
-        $images = \File::allFiles(public_path($directorio));
+        $images = \File::Files($directorio);
         return view('panel.album.album', compact('images', 'directorio', 'album'));
     }
 
@@ -104,10 +38,10 @@ class AlbumController extends Controller
 
         $aux = Auth::user()->albums->count() + 1;
         $directorio = "images/" . Auth::user()->id . "/" . $aux;
-        if (File::exists($directorio)) {
+        if (Storage::exists($directorio)) {
             $album = new Album();
             $album->portada = $directorio . "/portada.jpeg";
-            $album->cantidad =  count(\File::allFiles(public_path($directorio)));
+            $album->cantidad =  count(\File::allFiles($directorio));
             $album->user_id = Auth::user()->id;
             $album->identificador = Auth::user()->id . "-" . $aux;
 
